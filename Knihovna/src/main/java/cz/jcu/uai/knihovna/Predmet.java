@@ -14,6 +14,6 @@ import java.util.List;
 public abstract class Predmet {
     private String nazev;
     private int pocet;
-    private List<Vypujcka> vypujcky;
+    private List<Zakaznik> vypujcky;
     
 }
