@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author User
  */
-class Zakaznik implements Serializable {
+public class Zakaznik implements Serializable {
     private String jmeno;
     private LocalDate lhutaOd, lhutaDo;
 
