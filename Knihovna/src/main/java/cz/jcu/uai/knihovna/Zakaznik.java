@@ -6,16 +6,16 @@
 package cz.jcu.uai.knihovna;
 
 import java.time.LocalDate;
-
+import java.io.Serializable;
 /**
  *
  * @author User
  */
-class Vypujcka {
+class Zakaznik implements Serializable {
     private String jmeno;
     private LocalDate lhutaOd, lhutaDo;
 
-    public Vypujcka(String jmeno, LocalDate lhutaOd, LocalDate lhutaDo) {
+    public Zakaznik (String jmeno, LocalDate lhutaOd, LocalDate lhutaDo) {
         this.jmeno = jmeno;
         this.lhutaOd = lhutaOd;
         this.lhutaDo = lhutaDo;
