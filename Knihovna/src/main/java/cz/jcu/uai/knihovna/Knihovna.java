@@ -124,5 +124,6 @@ public class Knihovna {
     for(Predmet predmet : predmety) {
       res = res + predmet.toString();
     }
+    return res;
   }
 }
