@@ -87,5 +87,3 @@ public abstract class Predmet {
  public abstract String asString();
  public abstract PredmetSer zeser();
 }
-
-//TODO abstraktni metoda toString, serializace
