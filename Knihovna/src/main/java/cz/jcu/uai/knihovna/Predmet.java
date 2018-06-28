@@ -56,6 +56,4 @@ public abstract class Predmet {
   }
  public abstract String asString();
   
-
-  }
 }
