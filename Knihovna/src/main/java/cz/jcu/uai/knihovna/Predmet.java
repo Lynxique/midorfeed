@@ -36,6 +36,20 @@ public abstract class Predmet {
         return vypujcky;
     }
 
+    public void setNazev(StringProperty nazev) {
+        this.nazev = nazev;
+    }
+
+    public void setPocet(IntegerProperty pocet) {
+        this.pocet = pocet;
+    }
+
+    public void setVypujcky(ListProperty<Zakaznik> vypujcky) {
+        this.vypujcky = vypujcky;
+    }
+
+    
+    
     public Predmet (String nazev, int pocet) {
         this.nazev = new SimpleStringProperty(nazev);
         this.pocet = new SimpleIntegerProperty(pocet);
