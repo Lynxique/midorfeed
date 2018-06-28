@@ -41,7 +41,7 @@ public class Kniha extends Predmet {
   }
 
   @Override
-  public String toString() {
+  public String asString() {
     return (getAutor() + ": " + getNazev());
   }
 
