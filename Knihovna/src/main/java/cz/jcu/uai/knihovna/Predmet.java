@@ -32,8 +32,8 @@ public abstract class Predmet {
         getVypujcky().remove(zak);
     }
     
-    public ObservableList getVypujcky() {
-        return vypujcky.get();
+    public List getVypujcky() {
+        return vypujcky;
     }
 
     public Predmet (String nazev, int pocet) {
