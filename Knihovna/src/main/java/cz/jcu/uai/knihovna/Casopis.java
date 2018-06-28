@@ -32,8 +32,7 @@ public class Casopis extends Predmet {
   
   @Override
   public String asString(){
-    String vysl = "" + getAutor() + "/" + getNazev();
-    return vysl;
+    return (getAutor() + ": " + getNazev() + " " + (getPocet()-getVypujckySize()) + "/" + getPocet() + " " + vypujckyString());
   }
 
 }

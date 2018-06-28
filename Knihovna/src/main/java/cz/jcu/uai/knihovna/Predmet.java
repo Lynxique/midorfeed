@@ -58,6 +58,15 @@ public abstract class Predmet implements Serializable {
     this(nazev, pocet);
     this.vypujcky.addAll(vypujcky);
   }
+  
+  public String vypujckyString() {
+    String res = "{\n";
+    for(Zakaznik zak : vypujcky){
+      res = res + zak.asString() + ",\n";
+    }
+    res = res + "}";
+    return res;
+  }
  public abstract String asString();
   
 }

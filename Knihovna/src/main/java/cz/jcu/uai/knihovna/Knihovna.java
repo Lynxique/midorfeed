@@ -32,20 +32,16 @@ public class Knihovna {
  private ArrayList<Predmet> nactiPredmety(){
    ArrayList<Predmet> result = new ArrayList<>();
    File file = new File("Katalog.ser");
-   if(file.exists()){
+   if(file.length() != 0){
     try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))){
-      result = (ArrayList<Predmet>) ois.readObject();
-    } catch(ClassNotFoundException | IOException ex){
-      System.out.println("Nastala chyba při načítání katalogu");
-      System.out.println(ex.getMessage());
-    }
-   } else {
-      try {
-        file.createNewFile();
-      } catch(IOException ex){
-        System.out.println("Nastala chyba při vytváření souboru");
-        System.out.println(ex.getMessage());
+      Object tmp = ois.readObject();
+      if(tmp != null){
+        result = (ArrayList<Predmet>) tmp;
       }
+    } catch(ClassNotFoundException | IOException ex){
+      ex.printStackTrace();
+      System.out.println("Nastala chyba při načítání katalogu");
+    }
    }
    return result;
  }

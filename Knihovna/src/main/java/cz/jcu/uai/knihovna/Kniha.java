@@ -31,7 +31,7 @@ public class Kniha extends Predmet {
 
   @Override
   public String asString() {
-    return (getAutor() + ": " + getNazev() + " " + (getPocet()-getVypujckySize()) + "/" + getPocet() );
+    return (getAutor() + ": " + getNazev() + " " + (getPocet()-getVypujckySize()) + "/" + getPocet() + " " + vypujckyString());
   }
 
 }
