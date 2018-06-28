@@ -20,46 +20,69 @@ import javafx.collections.ObservableList;
  * @author User
  */
 public abstract class Predmet {
-    private StringProperty nazev;
-    private IntegerProperty pocet;
-    private ListProperty<Zakaznik> vypujcky;
-    
-    public void vypujc(Zakaznik zak) {
-        getVypujcky().add(zak);
-    }
-    
-    public void vrat (Zakaznik zak) {
-        getVypujcky().remove(zak);
-    }
-    
-    public List getVypujcky() {
-        return vypujcky;
-    }
+  
 
-    public void setNazev(StringProperty nazev) {
-        this.nazev = nazev;
-    }
+  private final StringProperty nazev;
+  private final IntegerProperty pocet;
+  private final ListProperty<Zakaznik> vypujcky;
 
-    public void setPocet(IntegerProperty pocet) {
-        this.pocet = pocet;
-    }
+  public void vypujc(Zakaznik zak){
+    getVypujcky().add(zak);
+  }
+  
+  public void vrat(Zakaznik zak){
+    getVypujcky().remove(zak);
+  }
+  
+  public ObservableList getVypujcky() {
+    return vypujcky.get();
+  }
 
-    public void setVypujcky(ListProperty<Zakaznik> vypujcky) {
-        this.vypujcky = vypujcky;
-    }
+  public void setVypujcky(ObservableList value) {
+    vypujcky.set(value);
+  }
 
-    
-    
-    public Predmet (String nazev, int pocet) {
-        this.nazev = new SimpleStringProperty(nazev);
-        this.pocet = new SimpleIntegerProperty(pocet);
-        ObservableList<Zakaznik> oL = FXCollections.observableArrayList();
-        this.vypujcky = new SimpleListProperty<Zakaznik>(oL);
-        
-    }
-    
-    public Predmet (String nazev, int pocet, List vypujcky) {
-        this(nazev, pocet);
-        this.vypujcky.addAll(vypujcky);
-    }      
+  public ListProperty vypujckyProperty() {
+    return vypujcky;
+  }
+  
+  public int getPocet() {
+    return pocet.get();
+  }
+
+  public void setPocet(int value) {
+    pocet.set(value);
+  }
+
+  public IntegerProperty pocetProperty() {
+    return pocet;
+  }
+  
+  public String getNazev() {
+    return nazev.get();
+  }
+
+  public void setNazev(String value) {
+    nazev.set(value);
+  }
+
+  public StringProperty nazevProperty() {
+    return nazev;
+  }
+  
+  
+  public Predmet(String nazev, int pocet){ 
+    this.nazev = new SimpleStringProperty(nazev);
+    this.pocet = new SimpleIntegerProperty(pocet);
+    ObservableList<Zakaznik> oL = FXCollections.observableArrayList();
+    this.vypujcky = new SimpleListProperty<Zakaznik>(oL);
+  }
+  
+
+  public Predmet(String nazev, int pocet, List vypujcky) { 
+    this(nazev, pocet);
+    this.vypujcky.addAll(vypujcky);
+  }
 }
+
+//TODO abstraktni metoda toString, serializace
