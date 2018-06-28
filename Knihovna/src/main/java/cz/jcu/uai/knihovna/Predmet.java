@@ -6,15 +6,6 @@
 package cz.jcu.uai.knihovna;
 
 import java.util.ArrayList;
-import java.util.List;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.ListProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleListProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 /**
  *
@@ -24,67 +15,47 @@ public abstract class Predmet {
   
 
   private final String nazev;
-  private final int pocet;
+  private int pocet;
   private final ArrayList<Zakaznik> vypujcky;
 
-  public void vypujc(Zakaznik zak){
-    getVypujcky().add(zak);
+  public boolean vypujc(Zakaznik zak){
+    if(getVypujckySize() >= getPocet()) {
+      return false;
+    }
+    return vypujcky.add(zak);
   }
   
-  public void vrat(Zakaznik zak){
-    getVypujcky().remove(zak);
+  public boolean vrat(Zakaznik zak){
+    if(getVypujckySize() == 0) {
+      return false;
+    }
+    return vypujcky.remove(zak);
   }
   
-  public ObservableList getVypujcky() {
-    return vypujcky.get();
-  }
-  
-  public void setVypujcky(ObservableList value) {
-    vypujcky.set(value);
-  }
-
-  public ListProperty vypujckyProperty() {
-    return vypujcky;
+  public int getVypujckySize() {
+    return vypujcky.size();
   }
   
   public int getPocet() {
-    return pocet.get();
+    return pocet;
   }
 
   public void setPocet(int value) {
-    pocet.set(value);
+    pocet = value;
   }
 
-  public IntegerProperty pocetProperty() {
-    return pocet;
-  }
-  
-  public String getNazev() {
-    return nazev.get();
-  }
-
-  public void setNazev(String value) {
-    nazev.set(value);
-  }
-
-  public StringProperty nazevProperty() {
-    return nazev;
-  }
-  
-  
   public Predmet(String nazev, int pocet){ 
-    this.nazev = new SimpleStringProperty(nazev);
-    this.pocet = new SimpleIntegerProperty(pocet);
-    ObservableList<Zakaznik> oL = FXCollections.observableArrayList();
-    this.vypujcky = new SimpleListProperty<Zakaznik>(oL);
+    this.nazev = nazev;
+    this.pocet = pocet;
+    this.vypujcky = new ArrayList<>();
   }
-  
 
-  public Predmet(String nazev, int pocet, List vypujcky) { 
+  public Predmet(String nazev, int pocet, ArrayList vypujcky) { 
     this(nazev, pocet);
     this.vypujcky.addAll(vypujcky);
   }
-  
  public abstract String asString();
- public abstract PredmetSer zeser();
+  
+
+  }
 }

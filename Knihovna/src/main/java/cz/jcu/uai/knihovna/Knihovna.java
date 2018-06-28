@@ -11,8 +11,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 /**
  *
@@ -23,8 +21,7 @@ public class Knihovna {
   private ArrayList<Predmet> predmety;
 
   public Knihovna() {
-    predmety = new ArrayList();
-    nactiPredmety();
+    predmety = nactiPredmety();
     
   }
   /**
@@ -81,7 +78,7 @@ public class Knihovna {
    if(predmet.getPocet() < dekrement){
       throw new IllegalArgumentException("Nelze odebrat více než máme.");
    }
-   if(predmet.getPocet() - predmet.getVypujcky().size() < dekrement){
+   if(predmet.getPocet() - predmet.getVypujckySize() < dekrement){
      throw new IllegalArgumentException("Nelze odebrat, jsou ještě vypůjčeny.");
    }
    predmet.setPocet(predmet.getPocet() - dekrement);
@@ -101,21 +98,14 @@ public class Knihovna {
     if(predmet == null || zakaznik == null) {
       throw new NullPointerException();
     }
-    if(predmet.getVypujcky().size() >= predmet.getPocet()) {
-      return false;
-    }
-    predmet.getVypujcky().add(zakaznik);
-    return true;
+    return predmet.vypujc(zakaznik);
   }
   
   public boolean vratit(Predmet predmet, Zakaznik zakaznik) throws NullPointerException {
     if(predmet == null || zakaznik == null) {
       throw new NullPointerException();
     }
-    if(predmet.getVypujcky().isEmpty()) {
-      return false;
-    }
-    return predmet.getVypujcky().remove(zakaznik);
+    return predmet.vrat(zakaznik);
   }
 
   @Override
