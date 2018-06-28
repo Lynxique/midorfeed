@@ -5,11 +5,8 @@
  */
 package cz.jcu.uai.knihovna;
 
+import java.util.ArrayList;
 import java.util.List;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 
 /**
  *
@@ -17,60 +14,20 @@ import javafx.beans.property.StringProperty;
  */
 public class Casopis extends Predmet {
 
-  private final StringProperty autor;
-  private final IntegerProperty rok;
-  private final IntegerProperty mesic;
+  private final String autor;
 
-  public int getMesic() {
-    return mesic.get();
-  }
-
-  public void setMesic(int value) {
-    mesic.set(value);
-  }
-
-  public IntegerProperty mesicProperty() {
-    return mesic;
-  }
-
-  public int getRok() {
-    return rok.get();
-  }
-
-  public void setRok(int value) {
-    rok.set(value);
-  }
-
-  public IntegerProperty rokProperty() {
-    return rok;
-  }
-  
-  
   public String getAutor() {
-    return autor.get();
-  }
-
-  public void setAutor(String value) {
-    autor.set(value);
-  }
-
-  public StringProperty autorProperty() {
     return autor;
   }
-  
-  
+
   public Casopis(String nazev, int rok, int mesic, int pocet) {
     super(nazev, pocet);
-    this.mesic = new SimpleIntegerProperty(mesic);
-    this.rok = new SimpleIntegerProperty(rok);
-    this.autor = new SimpleStringProperty(""+rok+" "+mesic);
+    this.autor = "" + rok + " " + mesic;
   }
   
-  public Casopis(String nazev, int rok, int mesic, int pocet, List vypujcky) {
+  public Casopis(String nazev, int rok, int mesic, int pocet, ArrayList vypujcky) {
     super(nazev, pocet, vypujcky);
-    this.mesic = new SimpleIntegerProperty(mesic);
-    this.rok = new SimpleIntegerProperty(rok);
-    this.autor = new SimpleStringProperty(""+rok+" "+mesic);
+    this.autor = "" + rok + " " + mesic;
   }
   
   @Override
@@ -79,8 +36,4 @@ public class Casopis extends Predmet {
     return vysl;
   }
 
-  @Override
-  public CasopisSer zeser() {
-    return new CasopisSer(this);
-  }
 }

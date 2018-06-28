@@ -5,13 +5,14 @@
  */
 package cz.jcu.uai.knihovna;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author User
  */
-public abstract class Predmet {
+public abstract class Predmet implements Serializable {
   
 
   private final String nazev;
@@ -40,6 +41,9 @@ public abstract class Predmet {
     return pocet;
   }
 
+  public String getNazev() {
+    return nazev;
+  }
   public void setPocet(int value) {
     pocet = value;
   }

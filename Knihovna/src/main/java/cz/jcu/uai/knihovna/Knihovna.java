@@ -5,6 +5,7 @@
  */
 package cz.jcu.uai.knihovna;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -30,12 +31,32 @@ public class Knihovna {
    */ 
  private ArrayList<Predmet> nactiPredmety(){
    ArrayList<Predmet> result = new ArrayList<>();
-   try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Katalog.ser"))){
-     result = (ArrayList<Predmet>) ois.readObject();
-   } catch(ClassNotFoundException | IOException ex){
-     System.out.println("Nastala chyba při načítání katalogu");
+   File file = new File("Katalog.ser");
+   if(file.exists()){
+    try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))){
+      result = (ArrayList<Predmet>) ois.readObject();
+    } catch(ClassNotFoundException | IOException ex){
+      System.out.println("Nastala chyba při načítání katalogu");
+      System.out.println(ex.getMessage());
+    }
+   } else {
+      try {
+        file.createNewFile();
+      } catch(IOException ex){
+        System.out.println("Nastala chyba při vytváření souboru");
+        System.out.println(ex.getMessage());
+      }
    }
    return result;
+ }
+ 
+ /**
+  * metoda vracející predmet na indexu index
+  * @param index index predmetu
+  * @return Predmet na pozici index
+  */
+ public Predmet getPredmet(int index){
+   return predmety.get(index);
  }
  
  /**
@@ -112,7 +133,7 @@ public class Knihovna {
   public String toString(){
     String res = "";
     for(Predmet predmet : predmety) {
-      res = res + predmet.toString();
+      res = res + predmet.asString() + "\n";
     }
     return res;
   }
