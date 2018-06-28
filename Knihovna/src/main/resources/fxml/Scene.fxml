@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml" fx:controller="cz.jcu.uai.knihovna.FXMLController">
-    <children>
-        <Button layoutX="126" layoutY="90" text="Click Me!" onAction="#handleButtonAction" fx:id="button" />
-        <Label layoutX="126" layoutY="120" minHeight="16" minWidth="69" fx:id="label" />
-    </children>
+<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="350.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="cz.jcu.uai.knihovna.FXMLController">
+   <children>
+      <ChoiceBox fx:id="toggle" prefHeight="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <TextField fx:id="vyhledavaciPole" layoutX="14.0" layoutY="35.0" promptText="Vyhledávací pole" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+      <Separator layoutX="60.0" layoutY="65.0" prefHeight="10.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <TableView fx:id="tabulka" layoutX="14.0" layoutY="85.0" prefHeight="250.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+        <columns>
+          <TableColumn fx:id="slpcAutor" minWidth="100.0" prefWidth="150.0" text="Autor/Datum" />
+          <TableColumn fx:id="slpcNazev" minWidth="100.0" prefWidth="150.0" text="Název" />
+            <TableColumn fx:id="slpcPocet" maxWidth="100.0" minWidth="50.0" prefWidth="50.0" text="Počet" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+   </children>
+   <padding>
+      <Insets bottom="20.0" />
+   </padding>
 </AnchorPane>
