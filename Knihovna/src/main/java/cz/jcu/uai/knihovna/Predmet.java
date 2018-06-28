@@ -5,6 +5,7 @@
  */
 package cz.jcu.uai.knihovna;
 
+import java.util.ArrayList;
 import java.util.List;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
@@ -22,9 +23,9 @@ import javafx.collections.ObservableList;
 public abstract class Predmet {
   
 
-  private final StringProperty nazev;
-  private final IntegerProperty pocet;
-  private final ListProperty<Zakaznik> vypujcky;
+  private final String nazev;
+  private final int pocet;
+  private final ArrayList<Zakaznik> vypujcky;
 
   public void vypujc(Zakaznik zak){
     getVypujcky().add(zak);
@@ -37,7 +38,7 @@ public abstract class Predmet {
   public ObservableList getVypujcky() {
     return vypujcky.get();
   }
-
+  
   public void setVypujcky(ObservableList value) {
     vypujcky.set(value);
   }
