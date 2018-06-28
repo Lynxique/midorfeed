@@ -9,7 +9,6 @@ package cz.jcu.uai.knihovna;
  *
  * @author User
  */
-public class Kniha extends Predmet{
-    
+public class Casopis {
     
 }
