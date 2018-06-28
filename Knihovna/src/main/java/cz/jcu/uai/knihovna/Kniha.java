@@ -5,11 +5,49 @@
  */
 package cz.jcu.uai.knihovna;
 
+import java.util.List;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
+
 /**
  *
- * @author User
+ * @author Uzivatel
  */
-public class Kniha extends Predmet{
-    
-    
+public class Kniha extends Predmet {
+  
+  private final StringProperty autor;
+
+  public String getAutor() {
+    return autor.get();
+  }
+
+  public void setAutor(String value) {
+    autor.set(value);
+  }
+
+  public StringProperty autorProperty() {
+    return autor;
+  }
+  
+  
+  public Kniha(String autor, String nazev, int pocet, List vypujcky) {
+    super(nazev, pocet, vypujcky); 
+    this.autor = new SimpleStringProperty(autor);
+  }
+  public Kniha(String autor, String nazev, int pocet) {
+    super(nazev, pocet);
+    this.autor = new SimpleStringProperty(autor);
+  }
+
+  @Override
+  public String toString() {
+    return (getAutor() + ": " + getNazev());
+  }
+
+  @Override
+  public KnihaSer zeser() {
+    return new KnihaSer(this);
+  }
+  
 }
