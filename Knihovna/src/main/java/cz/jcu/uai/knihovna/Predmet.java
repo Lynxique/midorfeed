@@ -83,6 +83,9 @@ public abstract class Predmet {
     this(nazev, pocet);
     this.vypujcky.addAll(vypujcky);
   }
+  
+ public abstract String asString();
+ public abstract PredmetSer zeser();
 }
 
 //TODO abstraktni metoda toString, serializace
