@@ -1,6 +1,8 @@
 package cz.jcu.uai.knihovna;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -19,6 +21,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ChoiceDialog;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogEvent;
 import javafx.scene.control.Label;
@@ -140,18 +144,44 @@ public class FXMLController implements Initializable {
             grid.setVgap(10);
             grid.setPadding(new Insets(20,20,10,10));
             dialog.setTitle("Správa předmětu");
-            
+            dialog.setHeaderText(vybrany.getVice() + " - " + vybrany.getNazev());
             Button odebratBttn = new Button("Odebrat");
             Button vypujcitBttn = new Button("Vypůjčit");
             Button vratitBttn = new Button("Vrátit");
+            odebratBttn.setOnAction(new OdebratHandler());
+            vypujcitBttn.setOnAction(new PujcitHandler());
+            vratitBttn.setOnAction(new VratitHandler());
             
-            odebratBttn.setOnAction();
+            grid.add(odebratBttn, 0, 1);
+            grid.add(vypujcitBttn, 0, 2);
+            grid.add(vratitBttn, 0, 3);
+            dialog.getDialogPane().setContent(grid);
+            dialog.showAndWait();
           }
         }
       });
     }
-    
-    class OdebratHandler implements EventHandler<ActionEvent>{
+
+  private class VratitHandler implements EventHandler<ActionEvent> {
+    @Override
+    public void handle(ActionEvent event) {
+      Predmet vybrany = tabulka.getSelectionModel().getSelectedItem();
+      if(vybrany != null && vybrany.getVypujckySize() != 0) {
+        ChoiceDialog<Zakaznik> dialog = new ChoiceDialog<>(vybrany.getVypujcky().get(0), vybrany.getVypujcky());
+        dialog.setTitle("Vrátit knihu");
+        dialog.setHeaderText(vybrany.getVice() + " - " + vybrany.getNazev());
+        dialog.setContentText("Kdo vrací?");
+        Optional<Zakaznik> odpoved = dialog.showAndWait();
+        if(odpoved.isPresent()){
+          vybrany.vrat(odpoved.get());
+          predmetyOL = FXCollections.observableList(knihovna.getPredmety());
+        }
+      }
+    }
+
+  }
+  
+  private class OdebratHandler implements EventHandler<ActionEvent>{
       @Override
       public void handle(ActionEvent event) {
         Predmet vybrany = tabulka.getSelectionModel().getSelectedItem();
@@ -160,9 +190,62 @@ public class FXMLController implements Initializable {
           tid.setTitle("Odebrat předmět");
           tid.setHeaderText(vybrany.getVice() + " - " + vybrany.getNazev() + " || " + (vybrany.getPocet() - vybrany.getVypujckySize()) + "/" + vybrany.getPocet());
           tid.setContentText("Kolik odebrat?");
+          Optional<String> odpoved = tid.showAndWait();
+          if(odpoved.isPresent()){
+            if(vybrany.getPocet() - vybrany.getVypujckySize() < Integer.valueOf(odpoved.get())){
+              Alert test = new Alert(Alert.AlertType.CONFIRMATION);
+              test.setContentText("Nelze odebrat, jsou ještě vypůjčeny");
+              test.showAndWait();
+            } else {
+              vybrany.setPocet(vybrany.getPocet()-(Integer.valueOf(odpoved.get())));
+              if(vybrany.getPocet() == 0){
+                predmetyOL.remove(vybrany);
+              }
+            }
+          }
         }
       }
     }
+    
+    private class PujcitHandler implements EventHandler<ActionEvent>{
+
+      @Override
+      public void handle(ActionEvent event) {
+        final Predmet vybrany = tabulka.getSelectionModel().getSelectedItem();
+        if(vybrany != null) {
+          final Dialog<ButtonType> dialog = new Dialog<>();
+          dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+          GridPane grid = new GridPane();
+          grid.setHgap(10);
+          grid.setVgap(10);
+          grid.setPadding(new Insets(20,20,10,10));
+          dialog.setTitle("Vypůjčit");
+          final TextField jmenoField = new TextField();
+          jmenoField.setPromptText("Jméno");
+          final DatePicker vypujckaOdField = new DatePicker(LocalDate.now());
+          grid.add(new Label("Jméno:"), 0, 0);
+          grid.add(         jmenoField, 1, 0);
+          grid.add(   new Label("Od:"), 0, 1);
+          grid.add(    vypujckaOdField, 1, 1);
+          dialog.setOnHidden(new EventHandler<DialogEvent>() {
+            @Override
+            public void handle(DialogEvent event) {
+              if(dialog.getResult().equals(ButtonType.OK)){
+                if(!jmenoField.getText().isEmpty()){
+                  Zakaznik zak = new Zakaznik(jmenoField.getText(), vypujckaOdField.getValue());
+                  knihovna.vypujcit(vybrany, zak);
+                }
+              }
+            }
+          });
+          dialog.getDialogPane().setContent(grid);
+          dialog.showAndWait();
+        }
+      }
+      
+    }
+
+        //ChoiceDialog dialog = new ChoiceDialog(vybrany.getVypujcky().get(0), vybrany.getVypujcky());
             
   @FXML
   private void pridejPredmet(final ActionEvent event) {

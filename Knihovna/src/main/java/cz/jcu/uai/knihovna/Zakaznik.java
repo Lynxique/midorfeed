@@ -42,3 +42,4 @@ public class Zakaznik implements Serializable {
         return (jmeno + " | " + lhutaOd.toString() + " - " + lhutaOd.plusMonths(1).toString());
     }
 }
+  

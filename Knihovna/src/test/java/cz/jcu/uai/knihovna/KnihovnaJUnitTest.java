@@ -35,11 +35,11 @@ public class KnihovnaJUnitTest {
   // public void hello() {}
   @Test
   public void hello(){
-    Knihovna knihovna = new Knihovna();
-    System.out.println("000" + knihovna.toString() + "000");
+    //Knihovna knihovna = new Knihovna();
+    //System.out.println("000" + knihovna.toString() + "000");
     //knihovna.pridatPredmet(new Kniha("auto", "nazve", 10));
     //knihovna.vypujcit(knihovna.getPredmet(0), new Zakaznik("PEPIK", LocalDate.now()));
-    System.out.println("000" + knihovna.toString() + "000");
-    knihovna.ulozPredmety();
+    //System.out.println("000" + knihovna.toString() + "000");
+    //knihovna.ulozPredmety();
   }
 }

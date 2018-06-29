@@ -47,6 +47,9 @@ public abstract class Predmet implements Serializable {
   public void setPocet(int value) {
     pocet = value;
   }
+  public ArrayList<Zakaznik> getVypujcky(){
+    return vypujcky;
+  }
 
   public Predmet(String nazev, int pocet){ 
     this.nazev = nazev;
