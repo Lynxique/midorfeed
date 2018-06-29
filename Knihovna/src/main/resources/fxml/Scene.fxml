@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="350.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="cz.jcu.uai.knihovna.FXMLController">
+<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jcu.uai.knihovna.FXMLController">
    <children>
       <ChoiceBox fx:id="toggle" prefHeight="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <TextField fx:id="vyhledavaciPole" layoutX="14.0" layoutY="35.0" promptText="Vyhledávací pole" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
@@ -22,6 +22,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
+      <Button fx:id="pridatBttn" layoutX="34.0" layoutY="350.0" mnemonicParsing="false" onAction="#pridejPredmet" prefHeight="30.0" text="Přidat" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="184.0" />
    </children>
    <padding>
       <Insets bottom="20.0" />

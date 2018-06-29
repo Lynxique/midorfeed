@@ -55,6 +55,10 @@ public class Knihovna {
    return predmety.get(index);
  }
  
+ public ArrayList<Predmet> getPredmety() {
+   return predmety;
+ }
+ 
  /**
   * metoda ukládající List s předměty do souboru
   */

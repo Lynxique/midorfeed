@@ -68,5 +68,6 @@ public abstract class Predmet implements Serializable {
     return res;
   }
  public abstract String asString();
+ public abstract String getVice();
   
 }

@@ -2,23 +2,33 @@ package cz.jcu.uai.knihovna;
 
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 
 public class MainApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Scene.fxml"));
+        Parent root = loader.load();
+        final FXMLController controller = loader.getController();
         
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/Styles.css");
         
-        stage.setTitle("JavaFX and Maven");
+        stage.setTitle("Knihovna TSM");
         stage.setScene(scene);
+        stage.setOnHidden(new EventHandler<WindowEvent>() {
+          @Override
+          public void handle(WindowEvent event) {
+            controller.priZavreni();
+          }
+        });
         stage.show();
     }
 

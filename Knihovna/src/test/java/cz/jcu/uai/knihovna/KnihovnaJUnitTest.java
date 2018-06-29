@@ -38,7 +38,7 @@ public class KnihovnaJUnitTest {
     Knihovna knihovna = new Knihovna();
     System.out.println("000" + knihovna.toString() + "000");
     //knihovna.pridatPredmet(new Kniha("auto", "nazve", 10));
-    knihovna.vypujcit(knihovna.getPredmet(0), new Zakaznik("PEPIK", LocalDate.now()));
+    //knihovna.vypujcit(knihovna.getPredmet(0), new Zakaznik("PEPIK", LocalDate.now()));
     System.out.println("000" + knihovna.toString() + "000");
     knihovna.ulozPredmety();
   }

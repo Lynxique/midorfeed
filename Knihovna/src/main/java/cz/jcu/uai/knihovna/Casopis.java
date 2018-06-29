@@ -35,4 +35,9 @@ public class Casopis extends Predmet {
     return (getAutor() + ": " + getNazev() + " " + (getPocet()-getVypujckySize()) + "/" + getPocet() + " " + vypujckyString());
   }
 
+  @Override
+  public String getVice() {
+    return getAutor();
+  }
+ 
 }
