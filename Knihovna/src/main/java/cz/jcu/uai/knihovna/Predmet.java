@@ -7,6 +7,7 @@ package cz.jcu.uai.knihovna;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -17,7 +18,7 @@ public abstract class Predmet implements Serializable {
 
   private final String nazev;
   private int pocet;
-  private final ArrayList<Zakaznik> vypujcky;
+  private final List<Zakaznik> vypujcky;
 
   public boolean vypujc(Zakaznik zak){
     if(getVypujckySize() >= getPocet()) {
@@ -47,7 +48,7 @@ public abstract class Predmet implements Serializable {
   public void setPocet(int value) {
     pocet = value;
   }
-  public ArrayList<Zakaznik> getVypujcky(){
+  public List<Zakaznik> getVypujcky(){
     return vypujcky;
   }
 
@@ -57,7 +58,7 @@ public abstract class Predmet implements Serializable {
     this.vypujcky = new ArrayList<>();
   }
 
-  public Predmet(String nazev, int pocet, ArrayList vypujcky) { 
+  public Predmet(String nazev, int pocet, List vypujcky) { 
     this(nazev, pocet);
     this.vypujcky.addAll(vypujcky);
   }

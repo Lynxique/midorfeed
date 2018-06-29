@@ -5,7 +5,6 @@
  */
 package cz.jcu.uai.knihovna;
 
-import java.io.File;
 import java.time.LocalDate;
 import org.junit.After;
 import org.junit.Before;

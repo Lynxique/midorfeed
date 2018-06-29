@@ -5,7 +5,6 @@
  */
 package cz.jcu.uai.knihovna;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,7 +24,7 @@ public class Casopis extends Predmet {
     this.autor = "" + rok + " " + mesic;
   }
   
-  public Casopis(String nazev, int rok, int mesic, int pocet, ArrayList vypujcky) {
+  public Casopis(String nazev, int rok, int mesic, int pocet, List vypujcky) {
     super(nazev, pocet, vypujcky);
     this.autor = "" + rok + " " + mesic;
   }

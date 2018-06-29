@@ -5,7 +5,7 @@
  */
 package cz.jcu.uai.knihovna;
 
-import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -20,7 +20,7 @@ public class Kniha extends Predmet {
     return autor;
   }
 
-  public Kniha(String autor, String nazev, int pocet, ArrayList vypujcky) {
+  public Kniha(String autor, String nazev, int pocet, List vypujcky) {
     super(nazev, pocet, vypujcky); 
     this.autor = autor;
   }
