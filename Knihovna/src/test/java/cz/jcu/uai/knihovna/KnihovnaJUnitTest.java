@@ -5,6 +5,7 @@
  */
 package cz.jcu.uai.knihovna;
 
+import java.io.File;
 import java.time.LocalDate;
 import org.junit.After;
 import org.junit.Before;
@@ -17,11 +18,34 @@ import static org.junit.Assert.*;
  */
 public class KnihovnaJUnitTest {
   
-  public KnihovnaJUnitTest() {
-  }
-  
+
+  public Knihovna toTest;
+
   @Before
   public void setUp() {
+    toTest = new Knihovna();
+  }
+  
+  @Test
+  public void test1(){
+    assertTrue("Není prázdná", toTest.getPredmety().isEmpty());
+    toTest.pridatPredmet(new Kniha("Pekarek", "C#", 10));
+    assertEquals("Chyba při přidání Knihy", toTest.getPredmet(0).getNazev(), "C#");
+    assertEquals("Chyba při přidání Knihy", toTest.getPredmet(0).getVice(), "Pekarek");
+    assertEquals("Chyba při přidání Knihy", toTest.getPredmet(0).getPocet(), 10);
+    toTest.pridatPredmet(new Casopis("National", 1999, 12, 15));
+    assertEquals("Chyba při přidání Časáku", toTest.getPredmet(1).getNazev(), "National");
+    assertEquals("Chyba při přidání Časáku", toTest.getPredmet(1).getVice(), "1999 12");
+    assertEquals("Chyba při přidání Časáku", toTest.getPredmet(1).getPocet(), 15);
+    assertEquals("Nesedí počet", toTest.getPredmety().size(), 2);
+    assertTrue(toTest.vypujcit(toTest.getPredmet(0), new Zakaznik("Peky", LocalDate.now())));
+    assertEquals(toTest.getPredmet(0).getVypujckySize(), 1);
+    try{
+      toTest.odebratPredmet(toTest.getPredmet(0), 10);
+      fail();
+    } catch(IllegalArgumentException | NullPointerException ex) {
+      //prošlo v klidu
+    }
   }
   
   @After
@@ -33,13 +57,4 @@ public class KnihovnaJUnitTest {
   //
   // @Test
   // public void hello() {}
-  @Test
-  public void hello(){
-    //Knihovna knihovna = new Knihovna();
-    //System.out.println("000" + knihovna.toString() + "000");
-    //knihovna.pridatPredmet(new Kniha("auto", "nazve", 10));
-    //knihovna.vypujcit(knihovna.getPredmet(0), new Zakaznik("PEPIK", LocalDate.now()));
-    //System.out.println("000" + knihovna.toString() + "000");
-    //knihovna.ulozPredmety();
-  }
 }

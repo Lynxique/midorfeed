@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -19,19 +20,22 @@ import java.util.ArrayList;
  */
 public class Knihovna {
   
-  private ArrayList<Predmet> predmety;
+  private List<Predmet> predmety;
 
-  public Knihovna() {
-    predmety = nactiPredmety();
+  public Knihovna(){
+    predmety = new ArrayList<>();
+  }
+  
+  public Knihovna(File file) {
+    predmety = nactiPredmety(file);
     
   }
   /**
    * metoda načítající předměty ze souboru
    * @return ArrayList<Predmet> s nactenymi hodnotami
    */ 
- private ArrayList<Predmet> nactiPredmety(){
-   ArrayList<Predmet> result = new ArrayList<>();
-   File file = new File("Katalog.ser");
+ private List<Predmet> nactiPredmety(File file){
+   List<Predmet> result = new ArrayList<>();
    if(file.length() != 0){
     try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))){
       Object tmp = ois.readObject();
@@ -55,7 +59,7 @@ public class Knihovna {
    return predmety.get(index);
  }
  
- public ArrayList<Predmet> getPredmety() {
+ public List<Predmet> getPredmety() {
    return predmety;
  }
  

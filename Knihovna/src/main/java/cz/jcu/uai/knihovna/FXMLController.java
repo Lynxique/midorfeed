@@ -1,5 +1,6 @@
 package cz.jcu.uai.knihovna;
 
+import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.Optional;
@@ -60,7 +61,7 @@ public class FXMLController implements Initializable {
   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-      knihovna = new Knihovna();
+      knihovna = new Knihovna(new File("Katalog.ser"));
         toggle.getItems().addAll("Knihy", "Časopisy", "Vše");
         toggle.getSelectionModel().selectLast();
         predmetyOL = FXCollections.observableList(knihovna.getPredmety());
